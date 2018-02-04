@@ -12,13 +12,10 @@ public class FormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+    }
 
-        Button btnAction = findViewById(R.id.form_student_button);
-        btnAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(FormActivity.this, "Clicked!", Toast.LENGTH_LONG).show();
-            }
-        });
+    public void handleRegister(View v) {
+        Toast.makeText(FormActivity.this, "Clicked!", Toast.LENGTH_LONG).show();
+        finish();
     }
 }
