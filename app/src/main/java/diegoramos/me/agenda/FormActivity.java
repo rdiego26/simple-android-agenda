@@ -5,16 +5,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
+import diegoramos.me.agenda.helpers.FormHelper;
+import diegoramos.me.agenda.models.Student;
+
 public class FormActivity extends AppCompatActivity {
+
+    private FormHelper formHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
+        formHelper = new FormHelper(this);
     }
 
     @Override
@@ -29,7 +34,8 @@ public class FormActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.form_menu_ok:
-                Toast.makeText(FormActivity.this, "Clicked!", Toast.LENGTH_LONG).show();
+                Student student = formHelper.getStudent();
+                Toast.makeText(FormActivity.this, "Clicked!" + student.getName(), Toast.LENGTH_LONG).show();
                 finish();
                 break;
         }
