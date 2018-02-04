@@ -1,5 +1,6 @@
 package diegoramos.me.agenda;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,9 @@ public class StudentsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students_list);
+    }
 
+    private void getDataAndHandleToView() {
         StudentDAO studentDAO = new StudentDAO(this);
         List<Student> studentList = studentDAO.getAllStudents();
 
@@ -28,6 +31,12 @@ public class StudentsListActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, studentList);
         studentsListVw.setAdapter(adapter);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDataAndHandleToView();
     }
 
     public void goToForm(View v) {
