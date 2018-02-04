@@ -19,7 +19,7 @@ public class StudentDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE students(id INTEGER PRIMARY KEY," +
+        String sql = "CREATE TABLE students(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT NOT NULL, " +
                 "telephone TEXT, " +
                 "address TEXT, " +
@@ -58,6 +58,7 @@ public class StudentDAO extends SQLiteOpenHelper {
         List<Student> students = new ArrayList<>();
         while(cursor.moveToNext()) {
             Student student = new Student(
+                    cursor.getLong(cursor.getColumnIndex("id")),
                     cursor.getString(cursor.getColumnIndex("name")),
                     cursor.getString(cursor.getColumnIndex("telephone")),
                     cursor.getString(cursor.getColumnIndex("address")),
@@ -69,5 +70,12 @@ public class StudentDAO extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return students;
+    }
+
+    public void delete(Student student) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {student.getId().toString()};
+
+        db.delete("students", "id = ?", params);
     }
 }
