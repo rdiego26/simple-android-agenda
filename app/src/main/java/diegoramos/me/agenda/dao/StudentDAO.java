@@ -77,5 +77,6 @@ public class StudentDAO extends SQLiteOpenHelper {
         String[] params = {student.getId().toString()};
 
         db.delete("students", "id = ?", params);
+        db.close();
     }
 }
