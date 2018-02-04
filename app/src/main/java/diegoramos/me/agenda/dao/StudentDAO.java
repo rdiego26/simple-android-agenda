@@ -66,6 +66,7 @@ public class StudentDAO extends SQLiteOpenHelper {
             );
             students.add(student);
         }
+        cursor.close();
         db.close();
         return students;
     }
