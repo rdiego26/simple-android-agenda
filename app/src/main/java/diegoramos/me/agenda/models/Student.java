@@ -5,14 +5,14 @@ public class Student {
     private String telephone;
     private String address;
     private String site;
-    private double rate;
+    private double grade;
 
-    public Student(String name, String telephone, String address, String site, double rate) {
+    public Student(String name, String telephone, String address, String site, double grade) {
         this.name = name;
         this.telephone = telephone;
         this.address = address;
         this.site = site;
-        this.rate = rate;
+        this.grade = grade;
     }
 
     public String getName() {
@@ -47,11 +47,11 @@ public class Student {
         this.site = site;
     }
 
-    public double getRate() {
-        return rate;
+    public double getGrade() {
+        return grade;
     }
 
-    public void setRate(double rate) {
-        this.rate = rate;
+    public void setGrade(double grade) {
+        this.grade = grade;
     }
 }
