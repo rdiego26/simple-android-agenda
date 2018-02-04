@@ -51,7 +51,7 @@ public class StudentDAO extends SQLiteOpenHelper {
     }
 
     public List<Student> getAllStudents() {
-        String sql = "SELECT * FROM students;";
+        String sql = "SELECT * FROM students ORDER BY name;";
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
 
