@@ -1,7 +1,7 @@
 package diegoramos.me.agenda.models;
 
 public class Student {
-    private int id;
+    private Long id;
     private String name;
     private String telephone;
     private String address;
@@ -18,7 +18,7 @@ public class Student {
         this.grade = grade;
     }
 
-    public Student(int id, String name, String telephone, String address, String site, double grade) {
+    public Student(Long id, String name, String telephone, String address, String site, double grade) {
         this.id = id;
         this.name = name;
         this.telephone = telephone;
@@ -33,11 +33,11 @@ public class Student {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
