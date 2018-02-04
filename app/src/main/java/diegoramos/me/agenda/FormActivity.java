@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import diegoramos.me.agenda.dao.StudentDAO;
 import diegoramos.me.agenda.helpers.FormHelper;
 import diegoramos.me.agenda.models.Student;
 
@@ -35,6 +36,10 @@ public class FormActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.form_menu_ok:
                 Student student = formHelper.getStudent();
+                StudentDAO studentDAO = new StudentDAO(this);
+
+                studentDAO.insert(student);
+
                 Toast.makeText(FormActivity.this, "Clicked!" + student.getName(), Toast.LENGTH_LONG).show();
                 finish();
                 break;
