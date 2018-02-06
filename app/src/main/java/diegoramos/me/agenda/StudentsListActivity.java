@@ -29,6 +29,7 @@ public class StudentsListActivity extends AppCompatActivity {
 
         studentsListVw = findViewById(R.id.studentsList);
 
+        attachOnItemClickListener();
         registerForContextMenu(studentsListVw);
     }
 
@@ -69,5 +70,21 @@ public class StudentsListActivity extends AppCompatActivity {
         Intent goToFormIntent = new Intent(StudentsListActivity.this,
                 FormActivity.class);
         startActivity(goToFormIntent);
+    }
+
+    private void attachOnItemClickListener() {
+
+        studentsListVw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Student student = (Student) studentsListVw.getItemAtPosition(position);
+                Intent intentOpenForm = new Intent(StudentsListActivity.this,
+                        FormActivity.class);
+
+                intentOpenForm.putExtra("STUDENT", student);
+                startActivity(intentOpenForm);
+            }
+        });
+
     }
 }
