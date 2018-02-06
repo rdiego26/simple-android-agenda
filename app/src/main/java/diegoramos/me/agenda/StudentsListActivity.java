@@ -51,9 +51,11 @@ public class StudentsListActivity extends AppCompatActivity {
                 Student student = (Student) studentsListVw.getItemAtPosition(info.position);
                 StudentDAO studentDAO = new StudentDAO(StudentsListActivity.this);
                 studentDAO.delete(student);
+                getDataAndHandleToView();
                 return false;
             }
         });
+
     }
 
     private void getDataAndHandleToView() {
