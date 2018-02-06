@@ -36,6 +36,7 @@ public class FormHelper {
 
     public Student getStudent() {
         return new Student(
+          this.student.getId(),
           studentName.getText().toString(),
           studentTelephone.getText().toString(),
           studentAddress.getText().toString(),
