@@ -1,5 +1,6 @@
 package diegoramos.me.agenda;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +22,8 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
 
         formHelper = new FormHelper(this);
+        handleUpdateFlow();
+
     }
 
     @Override
@@ -38,13 +41,25 @@ public class FormActivity extends AppCompatActivity {
                 Student student = formHelper.getStudent();
                 StudentDAO studentDAO = new StudentDAO(this);
 
-                studentDAO.insert(student);
+                if (student.getId() == null) {
+                    studentDAO.insert(student);
+                } else {
+                    studentDAO.update(student);
+                }
 
-                Toast.makeText(FormActivity.this, "Clicked!" + student.getName(), Toast.LENGTH_LONG).show();
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void handleUpdateFlow() {
+        Intent intent = getIntent();
+        Student student = (Student) intent.getSerializableExtra("STUDENT");
+
+        if(student != null) {
+            formHelper.setFormValues(student);
+        }
     }
 
 }

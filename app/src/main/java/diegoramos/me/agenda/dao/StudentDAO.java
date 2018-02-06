@@ -35,18 +35,21 @@ public class StudentDAO extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(Student student) {
-        SQLiteDatabase db = getWritableDatabase();
-
+    private ContentValues contentValueFromStudent(Student student) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", student.getName());
         contentValues.put("telephone", student.getTelephone());
         contentValues.put("address", student.getAddress());
         contentValues.put("site", student.getSite());
         contentValues.put("grade", student.getGrade());
+        return contentValues;
+    }
+
+    public void insert(Student student) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = contentValueFromStudent(student);
 
         db.insert("students", null, contentValues);
-
         db.close();
     }
 
@@ -78,5 +81,14 @@ public class StudentDAO extends SQLiteOpenHelper {
 
         db.delete("students", "id = ?", params);
         db.close();
+    }
+
+    public void update(Student student) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = contentValueFromStudent(student);
+        String[] params = {student.getId().toString()};
+
+        db.update("students", contentValues, "id = ?", params);
+
     }
 }
