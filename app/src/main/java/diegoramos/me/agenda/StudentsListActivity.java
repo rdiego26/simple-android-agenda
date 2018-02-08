@@ -2,6 +2,7 @@ package diegoramos.me.agenda;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -42,13 +43,17 @@ public class StudentsListActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        MenuItem deleteMenuItem = menu.add("Deletar");
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        final Student student = (Student) studentsListVw.getItemAtPosition(info.position);
 
+        MenuItem visitSiteMenuItem = menu.add("Visitar Site");
+        listenVisitMenu(visitSiteMenuItem, student);
+
+
+        MenuItem deleteMenuItem = menu.add("Deletar");
         deleteMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                Student student = (Student) studentsListVw.getItemAtPosition(info.position);
                 StudentDAO studentDAO = new StudentDAO(StudentsListActivity.this);
                 studentDAO.delete(student);
                 getDataAndHandleToView();
@@ -56,6 +61,18 @@ public class StudentsListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void listenVisitMenu(MenuItem visitSiteMenuItem, Student student) {
+        Intent intentSite = new Intent(Intent.ACTION_VIEW);
+        String site = student.getSite();
+
+        if(!site.startsWith("http://")) {
+            site = "http://" + site;
+        }
+
+        intentSite.setData(Uri.parse(site));
+        visitSiteMenuItem.setIntent(intentSite);
     }
 
     private void getDataAndHandleToView() {
