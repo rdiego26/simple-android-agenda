@@ -1,7 +1,10 @@
 package diegoramos.me.agenda;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -46,6 +49,25 @@ public class StudentsListActivity extends AppCompatActivity {
         MenuItem visitSiteMenuItem = menu.add("Visitar Site");
         handleVisitSiteMenu(visitSiteMenuItem, student);
 
+        final MenuItem callMenuItem = menu.add("Ligar");
+        callMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(ActivityCompat.checkSelfPermission(StudentsListActivity.this, Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    final String[] permissions = { Manifest.permission.CALL_PHONE };
+
+                    ActivityCompat.requestPermissions(StudentsListActivity.this,
+                            permissions, 123);
+                } else {
+                    handleCallMenu(callMenuItem, student);
+                }
+
+                return false;
+            }
+        });
+
+
         MenuItem sendSMSMenuItem = menu.add("Enviar SMS");
         handleSendSMSMenu(sendSMSMenuItem, student);
 
@@ -63,6 +85,15 @@ public class StudentsListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void handleCallMenu(MenuItem menuItem, Student student) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        String phone = student.getTelephone();
+        Uri uri = Uri.parse("tel:" + phone);
+
+        intent.setData(uri);
+        menuItem.setIntent(intent);
     }
 
     private void handleMapMenu(MenuItem menuItem, Student student) {
