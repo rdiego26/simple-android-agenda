@@ -19,7 +19,7 @@ public class FormHelper {
     public FormHelper(FormActivity formActivity) {
         studentName = formActivity.findViewById(R.id.form_student_name);
         studentTelephone = formActivity.findViewById(R.id.form_student_telephone);
-        studentAddress = formActivity.findViewById(R.id.form_student_telephone);
+        studentAddress = formActivity.findViewById(R.id.form_student_address);
         studentSite = formActivity.findViewById(R.id.form_student_site);
         studentRate = formActivity.findViewById(R.id.form_student_rate);
         student = new Student();
