@@ -71,12 +71,7 @@ public class FormActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST_CODE) {
-            ImageView imageView = findViewById(R.id.form_image);
-            Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
-            Bitmap reducedBitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
-
-            imageView.setImageBitmap(reducedBitmap);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            formHelper.loadImage(photoPath);
         }
     }
 

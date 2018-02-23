@@ -24,15 +24,15 @@ public class StudentDAO extends SQLiteOpenHelper {
                 "telephone TEXT, " +
                 "address TEXT, " +
                 "site TEXT, " +
-                "grade REAL)";
+                "grade REAL," +
+                "photoPath TEXT)";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE IF EXISTS students;";
+        String sql = "ALTER TABLE students ADD COLUMN photoPath TEXT;";
         db.execSQL(sql);
-        onCreate(db);
     }
 
     private ContentValues contentValueFromStudent(Student student) {
@@ -42,6 +42,7 @@ public class StudentDAO extends SQLiteOpenHelper {
         contentValues.put("address", student.getAddress());
         contentValues.put("site", student.getSite());
         contentValues.put("grade", student.getGrade());
+        contentValues.put("photoPath", student.getPhotoPath());
         return contentValues;
     }
 
@@ -66,7 +67,8 @@ public class StudentDAO extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex("telephone")),
                     cursor.getString(cursor.getColumnIndex("address")),
                     cursor.getString(cursor.getColumnIndex("site")),
-                    cursor.getDouble(cursor.getColumnIndex("grade"))
+                    cursor.getDouble(cursor.getColumnIndex("grade")),
+                    cursor.getString(cursor.getColumnIndex("photoPath"))
             );
             students.add(student);
         }

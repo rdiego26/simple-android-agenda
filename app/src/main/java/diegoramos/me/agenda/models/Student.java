@@ -9,6 +9,7 @@ public class Student implements Serializable {
     private String address;
     private String site;
     private double grade;
+    private String photoPath;
 
     public Student() { }
 
@@ -29,11 +30,28 @@ public class Student implements Serializable {
         this.grade = grade;
     }
 
+    public Student(Long id, String name, String telephone, String address, String site, double grade, String photoPath) {
+        this.id = id;
+        this.name = name;
+        this.telephone = telephone;
+        this.address = address;
+        this.site = site;
+        this.grade = grade;
+        this.photoPath = photoPath;
+    }
+
     @Override
     public String toString() {
         return this.getName() + " - " + this.getGrade();
     }
 
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
 
     public Long getId() {
         return id;
