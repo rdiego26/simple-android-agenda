@@ -31,7 +31,7 @@ public class StudentDAO extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String sql;
-
+        // `break` purposely removed
         switch(oldVersion) {
             case 1:
                 sql = "ALTER TABLE students ADD COLUMN photoPath TEXT;";
