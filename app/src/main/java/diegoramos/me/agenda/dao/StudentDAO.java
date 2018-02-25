@@ -14,7 +14,7 @@ import diegoramos.me.agenda.models.Student;
 public class StudentDAO extends SQLiteOpenHelper {
 
     public StudentDAO(Context context) {
-        super(context, "Agenda", null, 1);
+        super(context, "Agenda", null, 2);
     }
 
     @Override
@@ -24,15 +24,20 @@ public class StudentDAO extends SQLiteOpenHelper {
                 "telephone TEXT, " +
                 "address TEXT, " +
                 "site TEXT, " +
-                "grade REAL," +
-                "photoPath TEXT)";
+                "grade REAL)";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "ALTER TABLE students ADD COLUMN photoPath TEXT;";
-        db.execSQL(sql);
+        String sql;
+
+        switch(oldVersion) {
+            case 1:
+                sql = "ALTER TABLE students ADD COLUMN photoPath TEXT;";
+                db.execSQL(sql);
+        }
+
     }
 
     private ContentValues contentValueFromStudent(Student student) {
