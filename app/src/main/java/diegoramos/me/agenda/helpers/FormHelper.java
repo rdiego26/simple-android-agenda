@@ -37,6 +37,7 @@ public class FormHelper {
         studentAddress.setText(student.getAddress());
         studentSite.setText(student.getSite());
         studentRate.setProgress(Double.valueOf(student.getGrade()).intValue());
+        loadImage(student.getPhotoPath());
         this.student = student;
     }
 
